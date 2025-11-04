@@ -1,0 +1,121 @@
+def makeCube():    
+    class pixel:
+        def __init__(self):
+            self.xpos = 0
+            self.ypos = 0
+            self.zpos = 0
+            self.color = ""
+
+        def moveU(self):
+            #move white by 90
+            pass
+        def moveAU(self):
+            #move white by -90
+            pass
+        def moveF(self):
+            #move green by 90
+            pass
+        def moveAF(self):
+            #move green by -90
+            pass
+        def moveR(self):
+            #move orange by 90
+            pass
+        def moveAR(self):
+            #move orange by -90
+            pass
+        def moveL(self):
+            #move red by 90
+            pass
+        def moveAL(self):
+            #move red by 90
+            pass
+
+    cube = []
+
+    for index in range(18):  # 6 faces of 3 layers(3x3) this maps the y coord
+        faceline = [pixel() for items in range(3)]
+        cube.append(faceline)
+
+    return cube
+
+
+def populateCube(cube): #makes cube initially a solved 
+    for y in range(18):
+        for x in range(3):
+            if y <= 2:
+                cube[y][x].color = "white"
+                cube[y][x].xpos = 1 + x
+                cube[y][x].ypos = 1 + x
+                cube[y][x].zpos = 4
+            elif 3 <= y <= 5:
+                cube[y][x].color = "yellow"
+                cube[y][x].xpos = 1 + x
+                cube[y][x].ypos = 1 + x
+                cube[y][x].zpos = 0
+            elif 6 <= y <= 8:
+                cube[y][x].color = "green"
+                cube[y][x].xpos = 1 + x
+                cube[y][x].ypos = 0
+                cube[y][x].zpos = 1 + x
+            elif 9 <= y <= 11:
+                cube[y][x].color = "red"
+                cube[y][x].xpos = 4
+                cube[y][x].ypos = 1 + x
+                cube[y][x].zpos = 1 + x
+                
+            elif 12 <= y <= 14:
+                cube[y][x].color = "blue"
+                cube[y][x].xpos = 1 + x
+                cube[y][x].ypos = 4
+                cube[y][x].zpos = 1 + x
+            elif 15 <= y <= 17:
+                cube[y][x].color = "orange"
+                cube[y][x].xpos = 0
+                cube[y][x].ypos = 1 + x
+                cube[y][x].zpos = 1 + x
+
+    return cube
+
+def moveCube():
+    pass
+    
+
+def checkCorrect(cube):
+    correctPixel = 0
+    iscorrect = False
+    for y in range(18):
+        for x in range(3):
+            if y <= 2 and cube[y][x].color == "white":
+                correctPixel = correctTriple + 1
+
+            elif 3 <= y <= 5 and cube[y][x].color == "yellow":
+                correctPixel = correctPixel + 1
+
+            elif 6 <= y <= 8 and cube[y][x].color == "green":
+                correctPixel = correctPixel + 1
+
+            elif 9 <= y <= 11 and cube[y][x].color == "red":
+                correctPixel = correctPixel + 1
+
+                
+            elif 12 <= y <= 14 and cube[y][x].color == "blue":
+                correctPixel = correctPixel + 1
+
+            elif 15 <= y <= 17 and cube[y][x].color == "orange":
+                correctPixel = correctPixel + 1
+                
+    correctFace = correctPixel/18
+    
+    if correctFace == 6:
+        iscorrect = True
+            
+    print(correctFace)
+
+def main():
+    cube = makeCube()
+    populateCube(cube)
+    checkCorrect(cube)
+
+
+main()
